@@ -3,15 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.7",
+    "@emotion/styled": "^10.0.7",
+    "@ensdomains/ens": "0.3.3",
+    "@ensdomains/ens-022": "npm:@ensdomains/ens@0.2.2",
+    "@ensdomains/hackathon-registrar": "^1.0.0",
+    "@ensdomains/resolver": "^0.1.1",
+    "ethereumjs-util": "^6.1.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "react-spring": "^8.0.10",
+    "web3": "1.0.0-beta.34"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "now-build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
