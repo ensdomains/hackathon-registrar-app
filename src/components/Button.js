@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "@emotion/styled"
+import React from 'react'
+import styled from '@emotion/styled'
 
-const ButtonContainer = styled("button")`
+export const buttonStyles = `
   font-family: Overpass;
   color: white;
   font-size: 16px;
@@ -17,6 +17,10 @@ const ButtonContainer = styled("button")`
     background: #2c46a6;
     border: 2px solid #2c46a6;
   }
+`
+
+const ButtonContainer = styled('button')`
+  ${buttonStyles}
 `
 
 function Button({ children, onClick }) {

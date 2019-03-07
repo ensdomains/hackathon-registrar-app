@@ -3,12 +3,18 @@ import styled from '@emotion/styled'
 
 import Heading from './Heading'
 import Message from './Message'
-import Button from './Button'
+import Button, { buttonStyles } from './Button'
 
 const RegisteredContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+
+const LinkToManager = styled('a')`
+  margin-top: 20px;
+  text-decoration: none;
+  ${buttonStyles}
 `
 
 function Registered({ searchInput, setPage, page = { page } }) {
@@ -21,6 +27,11 @@ function Registered({ searchInput, setPage, page = { page } }) {
         page={page}
       />
       <Button onClick={() => setPage('SEARCH')}>Enter another name</Button>
+      <LinkToManager
+        href={`https://manager.ens.domains/name/${searchInput}.ethglobal.eth`}
+      >
+        Check out your new domain on the ENS manager
+      </LinkToManager>
     </RegisteredContainer>
   )
 }
