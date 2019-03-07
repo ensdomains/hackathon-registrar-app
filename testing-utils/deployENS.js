@@ -65,7 +65,8 @@ module.exports = async function deployENS({ web3, accounts }) {
   const hackRegistrar = await deploy(
     hackthonRegistrarJSON,
     ens._address,
-    namehash("ethglobal.eth")
+    namehash("ethglobal.eth"),
+    resolver._address
   )
 
   const ensContract = ens.methods

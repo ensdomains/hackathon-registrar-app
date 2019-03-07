@@ -1,13 +1,13 @@
 {
   "name": "ens-hackathon-registrar-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "@ensdomains/ens": "0.3.3",
     "@ensdomains/ens-022": "npm:@ensdomains/ens@0.2.2",
-    "@ensdomains/hackathon-registrar": "^1.0.0",
+    "@ensdomains/hackathon-registrar": "^1.0.1",
     "@ensdomains/resolver": "^0.1.1",
     "ethereumjs-util": "^6.1.0",
     "react": "^16.8.4",
