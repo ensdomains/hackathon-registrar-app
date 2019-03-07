@@ -19,9 +19,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "preTest": "node --experimental-modules testing-utils/preTest.mjs",
+    "postbuild": "cp build/index.html build/200.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "now-build": "react-scripts build"
+    "now-build": "react-scripts build",
+    "deploy": "npm run build && npm run postbuild && surge build ethparis.ens.domains"
   },
   "eslintConfig": {
     "extends": "react-app"
