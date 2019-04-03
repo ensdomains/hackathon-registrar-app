@@ -69,8 +69,6 @@ const IndexPage = props => {
   const urlParams = new URLSearchParams(window.location.search)
   const token = urlParams.get('token')
 
-  console.log(readENS)
-
   if (!web3) {
     return (
       <LoaderContainer>

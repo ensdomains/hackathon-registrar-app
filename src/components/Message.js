@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "@emotion/styled"
+import React from 'react'
+import styled from '@emotion/styled'
 
-const MessageContainer = styled("div")`
+const MessageContainer = styled('div')`
   font-family: Overpass;
   text-transform: uppercase;
   font-weight: 700;
@@ -35,11 +35,12 @@ const icons = {
         fill-rule="evenodd"
       />
     </svg>
-  ),
+  )
 }
 
 function Message({ message, page }) {
   const icon = icons[page]
+  console.log(page)
   return (
     <MessageContainer>
       {icon}

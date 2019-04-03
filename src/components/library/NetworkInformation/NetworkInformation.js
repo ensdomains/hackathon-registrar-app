@@ -5,7 +5,6 @@ import mq from '../../../mediaQuery'
 
 import UnstyledBlockies from '../Blockies'
 import useWeb3 from '../useWeb3'
-import ReverseRecord from '../ReverseRecord'
 import NoAccountsModal from '../NoAccounts/NoAccountsModal'
 
 const NetworkInformationContainer = styled('div')`

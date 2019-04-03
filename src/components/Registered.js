@@ -17,7 +17,7 @@ const LinkToManager = styled('a')`
   ${buttonStyles}
 `
 
-function Registered({ searchInput, setPage, page = { page } }) {
+function Registered({ searchInput, setPage, page }) {
   return (
     <RegisteredContainer>
       <Message message="Congratulations" page={page} />
