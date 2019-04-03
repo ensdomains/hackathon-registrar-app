@@ -48,6 +48,18 @@ const NetworkInformation = styled(NetworkInformationDefault)`
   `}
 `
 
+const Instructions = styled('h3')`
+  font-family: Overpass;
+  font-weight: 100;
+  font-size: 42px;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  strong {
+    font-weight: 400;
+  }
+`
+
 async function handleRegister({ hackathonRegistrar, label, token, account }) {
   const hash = await hackathonRegistrar.hash(label, account).call()
   const privatekey = new Buffer(token, 'hex')
@@ -68,6 +80,7 @@ const IndexPage = props => {
   const springProps = useSpring({ opacity: 1, from: { opacity: 0 } })
   const urlParams = new URLSearchParams(window.location.search)
   const token = urlParams.get('token')
+  const domain = urlParams.get('domain')
 
   if (!web3) {
     return (
@@ -84,13 +97,17 @@ const IndexPage = props => {
           {page === 'SEARCH' && (
             <>
               <LogoLarge src={ENSLogo} />
+              <Instructions>
+                Register an <strong>{domain}.eth</strong> subdomain
+              </Instructions>
               <SearchLarge
                 buttonText="Register"
                 searchInput={searchInput}
+                placeholder={`Enter a label to register label.${domain}.eth`}
                 onSubmit={async e => {
                   e.preventDefault()
                   const owner = await readENS
-                    .owner(await getNamehash(`${searchInput}.ethglobal.eth`))
+                    .owner(await getNamehash(`${searchInput}.${domain}.eth`))
                     .call()
 
                   if (parseInt(owner, 16) !== 0) {
@@ -107,7 +124,7 @@ const IndexPage = props => {
                       setPage('REGISTERED')
                       readENS
                         .owner(
-                          await getNamehash(`${searchInput}.ethglobal.eth`)
+                          await getNamehash(`${searchInput}.${domain}.eth`)
                         )
                         .call()
                         .then(console.log)

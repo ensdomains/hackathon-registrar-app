@@ -24,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "now-build": "react-scripts build",
-    "deploy": "npm run build && npm run postbuild && surge build ethparis.ens.domains"
+    "deploy": "npm run build && npm run postbuild && surge build hackathons.ens.domains"
   },
   "eslintConfig": {
     "extends": "react-app"

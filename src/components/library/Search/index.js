@@ -39,7 +39,7 @@ const SearchForm = styled('form')`
 
     &::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
-      color: #ccd4da;
+      color: #ccc;
     }
   }
 
@@ -63,12 +63,18 @@ const SearchForm = styled('form')`
   }
 `
 
-function Search({ className, onSubmit, onChange, buttonText }) {
+function Search({
+  className,
+  onSubmit,
+  onChange,
+  buttonText,
+  placeholder = 'Search'
+}) {
   let input
   return (
     <SearchForm action="#" onSubmit={onSubmit} className={className}>
       <input
-        placeholder="Search names"
+        placeholder={placeholder}
         ref={el => (input = el)}
         onChange={onChange}
       />
