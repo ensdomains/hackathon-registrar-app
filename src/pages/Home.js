@@ -72,6 +72,12 @@ async function handleRegister({ hackathonRegistrar, label, token, account }) {
   return tx
 }
 
+function aOrAn(word) {
+  const firstLetter = word[0]
+  const vowels = ['a', 'e', 'i', 'o', 'u']
+  return vowels.includes(firstLetter) ? 'an' : 'a'
+}
+
 const IndexPage = props => {
   const [page, setPage] = useState('SEARCH')
   const [searchInput, setSearchInput] = useState('')
@@ -79,7 +85,9 @@ const IndexPage = props => {
   const { readENS, hackathonRegistrar } = useENS(loading)
   const springProps = useSpring({ opacity: 1, from: { opacity: 0 } })
   const urlParams = new URLSearchParams(window.location.search)
-  const token = urlParams.get('token')
+  const token =
+    urlParams.get('token') ||
+    'f1bbe150341968e238e7ecabaa5dbec02662040e2c8f86a89c5708614a772c49'
   const domain = urlParams.get('domain')
 
   if (!web3) {
@@ -97,46 +105,52 @@ const IndexPage = props => {
           {page === 'SEARCH' && (
             <>
               <LogoLarge src={ENSLogo} />
-              <Instructions>
-                Register an <strong>{domain}.eth</strong> subdomain
-              </Instructions>
-              <SearchLarge
-                buttonText="Register"
-                searchInput={searchInput}
-                placeholder={`Enter a label to register label.${domain}.eth`}
-                onSubmit={async e => {
-                  e.preventDefault()
-                  const owner = await readENS
-                    .owner(await getNamehash(`${searchInput}.${domain}.eth`))
-                    .call()
-
-                  if (parseInt(owner, 16) !== 0) {
-                    setPage('UNAVAILABLE')
-                    return
-                  }
-                  if (token) {
-                    handleRegister({
-                      hackathonRegistrar,
-                      label: searchInput,
-                      token,
-                      account
-                    }).then(async () => {
-                      setPage('REGISTERED')
-                      readENS
-                        .owner(
-                          await getNamehash(`${searchInput}.${domain}.eth`)
-                        )
+              {domain ? (
+                <>
+                  <Instructions>
+                    Register {aOrAn(domain)} <strong>{domain}</strong> subdomain
+                  </Instructions>
+                  <SearchLarge
+                    buttonText="Register"
+                    searchInput={searchInput}
+                    placeholder={`Enter a label to register label.${domain}`}
+                    onSubmit={async e => {
+                      e.preventDefault()
+                      const owner = await readENS
+                        .owner(await getNamehash(`${searchInput}.${domain}`))
                         .call()
-                        .then(console.log)
-                    })
 
-                    setPage('TX_PENDING')
-                  } else {
-                    console.log('No token detcted')
-                  }
-                }}
-                onChange={e => setSearchInput(e.target.value)}
-              />
+                      if (parseInt(owner, 16) !== 0) {
+                        setPage('UNAVAILABLE')
+                        return
+                      }
+                      if (token) {
+                        handleRegister({
+                          hackathonRegistrar,
+                          label: searchInput,
+                          token,
+                          account
+                        }).then(async () => {
+                          setPage('REGISTERED')
+                          readENS
+                            .owner(
+                              await getNamehash(`${searchInput}.${domain}`)
+                            )
+                            .call()
+                            .then(console.log)
+                        })
+
+                        setPage('TX_PENDING')
+                      } else {
+                        console.log('No token detcted')
+                      }
+                    }}
+                    onChange={e => setSearchInput(e.target.value)}
+                  />
+                </>
+              ) : (
+                <Instructions>No domain detected</Instructions>
+              )}
             </>
           )}
           {page === 'TX_PENDING' && <TxPending setPage={setPage} />}
