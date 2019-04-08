@@ -7,10 +7,13 @@ export default function useENS(web3Loading) {
   const [readENS, setReadENS] = useState(undefined)
   const [registrar, setRegistrar] = useState(undefined)
 
-  const fetchENS = async (web3Loading, hackathonRegistrarAddress) => {
+  const fetchENS = async (web3Loading, domain) => {
     if (web3Loading) return
     const { ENS, readENS } = await getENS()
-    const { registrar } = await getHackathonRegistrar(hackathonRegistrarAddress)
+    const hackathonRegisaddresstrarAddress = ENS.owner(domain).call()
+    const { registrar } = await getHackathonRegistrar(
+      hackathonRegisaddresstrarAddress
+    )
 
     setENS(ENS)
     setReadENS(readENS)
