@@ -84,7 +84,6 @@ const IndexPage = props => {
     urlParams.get('token') ||
     'f1bbe150341968e238e7ecabaa5dbec02662040e2c8f86a89c5708614a772c49'
   const domain = urlParams.get('domain')
-  console.log(domain)
 
   const [page, setPage] = useState('SEARCH')
   const [searchInput, setSearchInput] = useState('')
@@ -147,7 +146,7 @@ const IndexPage = props => {
                         console.log('No token detcted')
                       }
                     }}
-                    onChange={e => setSearchInput(e.target.value)}
+                    onChange={e => setSearchInput(e.target.value.toLowerCase())}
                   />
                 </>
               ) : (
