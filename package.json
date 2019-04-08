@@ -9,6 +9,7 @@
     "@ensdomains/ens-022": "npm:@ensdomains/ens@0.2.2",
     "@ensdomains/hackathon-registrar": "^1.0.1",
     "@ensdomains/resolver": "^0.1.1",
+    "eth-ens-namehash": "^2.0.8",
     "ethereumjs-util": "^6.1.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

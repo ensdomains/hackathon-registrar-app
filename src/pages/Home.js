@@ -16,7 +16,7 @@ import ENSLogo from '../components/library/Logo/ENSLogo.svg'
 import { SearchLarge } from '../components/library/Search'
 import useWeb3 from '../components/library/useWeb3'
 import useENS from '../components/library/useENS'
-import { getNamehash } from '../components/library/ens'
+import { getNamehash, normalize } from '../components/library/ens'
 import Loader from '../components/library/Loader'
 
 const LogoLarge = styled('img')`
@@ -118,7 +118,7 @@ const IndexPage = props => {
                     onSubmit={async e => {
                       e.preventDefault()
                       const owner = await readENS
-                        .owner(await getNamehash(`${searchInput}.${domain}`))
+                        .owner(getNamehash(`${searchInput}.${domain}`))
                         .call()
 
                       if (parseInt(owner, 16) !== 0) {
@@ -134,9 +134,7 @@ const IndexPage = props => {
                         }).then(async () => {
                           setPage('REGISTERED')
                           readENS
-                            .owner(
-                              await getNamehash(`${searchInput}.${domain}`)
-                            )
+                            .owner(getNamehash(`${searchInput}.${domain}`))
                             .call()
                             .then(console.log)
                         })
@@ -146,7 +144,7 @@ const IndexPage = props => {
                         console.log('No token detcted')
                       }
                     }}
-                    onChange={e => setSearchInput(e.target.value.toLowerCase())}
+                    onChange={e => setSearchInput(normalize(e.target.value))}
                   />
                 </>
               ) : (
