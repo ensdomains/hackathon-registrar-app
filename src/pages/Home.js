@@ -82,7 +82,10 @@ const IndexPage = props => {
   const [page, setPage] = useState('SEARCH')
   const [searchInput, setSearchInput] = useState('')
   const { web3, account, loading } = useWeb3()
-  const { readENS, hackathonRegistrar } = useENS(loading)
+  const { readENS, hackathonRegistrar } = useENS(
+    loading,
+    urlParams.get('domain') || '0x0'
+  )
   const springProps = useSpring({ opacity: 1, from: { opacity: 0 } })
   const urlParams = new URLSearchParams(window.location.search)
   const token =

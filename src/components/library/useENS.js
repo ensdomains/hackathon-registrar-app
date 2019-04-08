@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import getENS, { getHackathonRegistrar } from "./ens"
+import { useEffect, useState } from 'react'
+import getENS, { getHackathonRegistrar } from './ens'
 
 export default function useENS(web3Loading) {
   const [loading, setLoading] = useState(true)
@@ -7,10 +7,10 @@ export default function useENS(web3Loading) {
   const [readENS, setReadENS] = useState(undefined)
   const [registrar, setRegistrar] = useState(undefined)
 
-  const fetchENS = async web3Loading => {
+  const fetchENS = async (web3Loading, hackathonRegistrarAddress) => {
     if (web3Loading) return
     const { ENS, readENS } = await getENS()
-    const { registrar } = await getHackathonRegistrar()
+    const { registrar } = await getHackathonRegistrar(hackathonRegistrarAddress)
 
     setENS(ENS)
     setReadENS(readENS)

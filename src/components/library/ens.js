@@ -142,12 +142,8 @@ async function getTestRegistrarContract() {
   }
 }
 
-async function getHackathonRegistrar() {
+async function getHackathonRegistrar(address) {
   const web3 = await getWeb3()
-  const { ENS } = await getENS()
-
-  const namehash = await getNamehash('ethglobal.eth')
-  const address = await ENS.owner(namehash).call()
 
   return {
     registrar: new web3.eth.Contract(hackathonRegistrarContract, address)
