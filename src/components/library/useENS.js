@@ -9,15 +9,10 @@ export default function useENS(web3Loading, domain) {
 
   const fetchENS = async (web3Loading, domain) => {
     if (web3Loading) return
-    console.log(1)
     const { ENS, readENS } = await getENS()
-    console.log(2)
-    console.log(domain)
     const hackathonRegistrarAddress = await readENS
       .owner(await getNamehash(domain))
       .call()
-    console.log(3)
-    console.log(hackathonRegistrarAddress)
     const { registrar } = await getHackathonRegistrar(hackathonRegistrarAddress)
 
     setENS(ENS)
