@@ -79,19 +79,16 @@ function aOrAn(word) {
 }
 
 const IndexPage = props => {
-  const [page, setPage] = useState('SEARCH')
-  const [searchInput, setSearchInput] = useState('')
-  const { web3, account, loading } = useWeb3()
-  const { readENS, hackathonRegistrar } = useENS(
-    loading,
-    urlParams.get('domain') || '0x0'
-  )
-  const springProps = useSpring({ opacity: 1, from: { opacity: 0 } })
   const urlParams = new URLSearchParams(window.location.search)
   const token =
     urlParams.get('token') ||
     'f1bbe150341968e238e7ecabaa5dbec02662040e2c8f86a89c5708614a772c49'
   const domain = urlParams.get('domain')
+  const [page, setPage] = useState('SEARCH')
+  const [searchInput, setSearchInput] = useState('')
+  const { web3, account, loading } = useWeb3()
+  const { readENS, hackathonRegistrar } = useENS(loading, domain || '0x0')
+  const springProps = useSpring({ opacity: 1, from: { opacity: 0 } })
 
   if (!web3) {
     return (
